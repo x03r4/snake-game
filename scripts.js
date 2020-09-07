@@ -101,3 +101,6 @@ function game() {
   score(); //sprawdza czy trafiło na jabłko
   drawApple(); //rysuje jabłko
 }
+
+
+//dodać licznik punktów
