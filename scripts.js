@@ -7,13 +7,17 @@ window.onload = function () {
 
 let snakePosX = 0;
 let snakePosY = 0;
-let grid = 20;
+const grid = 20;
 let applePosX = Math.floor(Math.random() * grid);
 let applePosY = Math.floor(Math.random() * grid);
 let changePosX = 0;
 let changePosY = 0;
 const snake = [];
 let snakeLength = 3;
+let counter = 0;
+let points = document.querySelector('.counter');
+points.innerHTML = counter;
+
 
 function direction(e) {
   switch (e.keyCode) {
@@ -59,20 +63,26 @@ function move() {
 function score() {
   if (applePosX === snakePosX && applePosY === snakePosY) {
     snakeLength++;
+    counter+=100;
     applePosX = Math.floor(Math.random() * grid);
     applePosY = Math.floor(Math.random() * grid);
+    console.log(counter);
+    points.innerHTML = counter;
+
   }
 }
 
 function drawSnake() {
   //rysuje snejka
-  ctx.fillStyle = "black";
+  ctx.fillStyle = "#424242";
 
   for (let i = 0; i < snake.length; i++) {
-    ctx.fillRect(snake[i].x * grid, snake[i].y * grid, grid, grid);
+    ctx.fillRect(snake[i].x * grid, snake[i].y * grid, grid-2, grid-2);
     if (snake[i].x === snakePosX && snake[i].y === snakePosY) {
       //wykrywa zderzenie z samym sobą
       snakeLength = 3; //po zderzeniu resetuje długość snejka
+      counter = 0;
+      points.innerHTML = counter;
     }
   }
 
@@ -85,12 +95,12 @@ function drawSnake() {
 }
 
 function drawBackground() {
-  ctx.fillStyle = "white";
+  ctx.fillStyle = "#c4c4c4";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
 function drawApple() {
-  ctx.fillStyle = "red";
+  ctx.fillStyle = "#D14657";
   ctx.fillRect(applePosX * grid, applePosY * grid, grid, grid);
 }
 
